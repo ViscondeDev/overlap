@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://d30a8kffhkvc3"]
+
+[ext_resource type="Script" uid="uid://ciu3torymura" path="res://2d_world/de_lorean/de_lorean.gd" id="1_bqi4k"]
+[ext_resource type="Texture2D" uid="uid://bxg67qoqyghrl" path="res://2d_world/de_lorean/car_texture.png" id="1_dsd0i"]
+[ext_resource type="Script" uid="uid://cu64es64ju8gs" path="res://common/stacked_sprite.gd" id="2_bqi4k"]
+[ext_resource type="Script" uid="uid://cmm3staxkequ2" path="res://2d_world/de_lorean/car_camera.gd" id="4_l467g"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smx3j"]
+radius = 15.0
+height = 88.0
+
+[node name="DeLorean" type="CharacterBody2D"]
+script = ExtResource("1_bqi4k")
+state = 1
+steering_max_angle = 60
+
+[node name="StackingSprites" type="Sprite2D" parent="."]
+position = Vector2(-5, 0)
+rotation = 0.00196405
+texture = ExtResource("1_dsd0i")
+flip_h = true
+hframes = 18
+script = ExtResource("2_bqi4k")
+render_on_editor = true
+metadata/_custom_type_script = "uid://cu64es64ju8gs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_smx3j")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+editor_draw_drag_margin = true
+script = ExtResource("4_l467g")
+player = NodePath("..")

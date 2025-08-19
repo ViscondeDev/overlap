@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bstdy6jbmd2kc"]
+
+[ext_resource type="Script" uid="uid://o0cvsxo53q1w" path="res://2d_world/track/player_path.gd" id="1_nm1w2"]
+
+[sub_resource type="Curve2D" id="Curve2D_ryrav"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 143, -130)
+}
+point_count = 1
+
+[node name="PlayerPath" type="Path2D"]
+curve = SubResource("Curve2D_ryrav")
+script = ExtResource("1_nm1w2")

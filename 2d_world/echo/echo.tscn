@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c05jwaefw28f7"]
+
+[ext_resource type="Script" uid="uid://cprvv03176av5" path="res://2d_world/echo/echo.gd" id="1_b48kj"]
+[ext_resource type="Texture2D" uid="uid://bxg67qoqyghrl" path="res://2d_world/de_lorean/car_texture.png" id="2_wv6dg"]
+[ext_resource type="Script" uid="uid://cu64es64ju8gs" path="res://common/stacked_sprite.gd" id="3_dk3sc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3b73e"]
+radius = 15.0
+height = 88.0
+
+[node name="Echo" type="PathFollow2D"]
+script = ExtResource("1_b48kj")
+
+[node name="StaticBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(-5, 0)
+collision_mask = 5
+
+[node name="StackingSprites" type="Sprite2D" parent="StaticBody2D"]
+rotation = 0.00196405
+texture = ExtResource("2_wv6dg")
+flip_h = true
+hframes = 18
+script = ExtResource("3_dk3sc")
+metadata/_custom_type_script = "uid://cu64es64ju8gs"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3b73e")
