@@ -12,7 +12,9 @@ height = 88.0
 [node name="DeLorean" type="CharacterBody2D"]
 script = ExtResource("1_bqi4k")
 state = 1
-steering_max_angle = 60
+max_speed = 1600
+traction_fast = 6
+traction_slow = 9
 
 [node name="StackingSprites" type="Sprite2D" parent="."]
 position = Vector2(-5, 0)

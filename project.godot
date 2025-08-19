@@ -36,8 +36,7 @@ folder_colors={
 "res://2d_world/": "blue",
 "res://2d_world/track/": "teal",
 "res://addons/": "gray",
-"res://common/": "yellow",
-"res://rules/": "orange"
+"res://common/": "yellow"
 }
 
 [input]
