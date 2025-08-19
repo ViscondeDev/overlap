@@ -1,16 +1,20 @@
-[gd_scene load_steps=7 format=4 uid="uid://bpi2q3j5ynusw"]
+[gd_scene load_steps=9 format=4 uid="uid://bpi2q3j5ynusw"]
 
 [ext_resource type="PackedScene" uid="uid://d30a8kffhkvc3" path="res://2d_world/de_lorean/de_lorean.tscn" id="1_l4rh5"]
 [ext_resource type="TileSet" uid="uid://v3gyd0dyg22o" path="res://2d_world/track/tilemap.tres" id="2_l2uqf"]
 [ext_resource type="Script" uid="uid://bsn7fnpkoh5vd" path="res://common/tile_map_exporter.gd" id="3_6g8l6"]
 [ext_resource type="Script" uid="uid://o0cvsxo53q1w" path="res://2d_world/track/player_path.gd" id="4_j6sh1"]
 [ext_resource type="PackedScene" uid="uid://c05jwaefw28f7" path="res://2d_world/echo/echo.tscn" id="5_8b0bl"]
+[ext_resource type="Script" uid="uid://lug821slslef" path="res://2d_world/track/finish_line.gd" id="6_l2uqf"]
 
 [sub_resource type="Curve2D" id="Curve2D_ryrav"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 143, -130)
 }
 point_count = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6g8l6"]
+size = Vector2(228, 624)
 
 [node name="World 2D" type="Node2D"]
 
@@ -30,3 +34,26 @@ script = ExtResource("4_j6sh1")
 echo_scene = ExtResource("5_8b0bl")
 player = NodePath("../DeLorean")
 updates_per_second = 10
+
+[node name="Main" type="Area2D" parent="."]
+position = Vector2(2499, 3523)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_l2uqf")
+type = "Main"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Main"]
+position = Vector2(32, 37)
+shape = SubResource("RectangleShape2D_6g8l6")
+
+[node name="Half" type="Area2D" parent="." node_paths=PackedStringArray("main_line")]
+position = Vector2(2358, 1426)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6_l2uqf")
+type = "Half"
+main_line = NodePath("../Main")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Half"]
+position = Vector2(32, 37)
+shape = SubResource("RectangleShape2D_6g8l6")

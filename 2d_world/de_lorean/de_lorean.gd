@@ -1,4 +1,4 @@
-class_name DeLorian
+class_name DeLorean
 extends CharacterBody2D
 
 signal engine_state_changed(state: EngineState)
@@ -20,7 +20,7 @@ enum TireState {
 	DRIFT,
 }
 
-@export_category("car settings")
+@export_group("car settings")
 @export var state: State = State.IDLE
 @export var steering_max_angle := 15
 @export var engine_power := 230

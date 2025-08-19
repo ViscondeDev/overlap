@@ -18,11 +18,11 @@ const CAMERA_POSITIONS: Dictionary[Positions, Dictionary] = {
 		"zoom":Vector2(0.8,0.8)},
 }
 
-@export var player: DeLorian
+@export var player: DeLorean
 
 var camera_position: Positions
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var player_movement_direction: float = player.velocity.normalized().dot(player.transform.x)
 	var player_movement_speed: float = player.velocity.length()
 

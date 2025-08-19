@@ -10,7 +10,7 @@ enum State {
 }
 
 @export var echo_scene: PackedScene
-@export var player: DeLorian
+@export var player: DeLorean
 @export var updates_per_second: int = 2
 
 var time_count: float = 0
@@ -19,9 +19,9 @@ var state: State = State.IDLE:
 		state = value
 		state_changed.emit()
 
-
 func _ready() -> void:
 	curve = Curve2D.new()
+	EventsManager.current_player_path = self
 
 
 func _physics_process(delta: float) -> void:
