@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="OverLap"
-run/main_scene="uid://bpi2q3j5ynusw"
+run/main_scene="uid://ci0h3m4vrs7hk"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://dix75tf6hefmv"
 

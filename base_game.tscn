@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://ci0h3m4vrs7hk"]
+
+[ext_resource type="Script" uid="uid://1beecwcs4ehk" path="res://UI/HUD/hud.gd" id="1_lei07"]
+[ext_resource type="PackedScene" uid="uid://bpi2q3j5ynusw" path="res://2d_world/level.tscn" id="2_l8n8p"]
+
+[node name="BaseGame" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_lei07")
+
+[node name="Timer" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = " asd"
+
+[node name="Laps" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = " asd"
+
+[node name="Level" parent="." instance=ExtResource("2_l8n8p")]
+time_limit = 15

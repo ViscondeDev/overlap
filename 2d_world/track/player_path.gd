@@ -57,7 +57,7 @@ func spawn_ghost() -> void:
 	echo.player_path = self
 	echo.global_position = curve.get_point_position(0)
 
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.2).timeout
 
 	snapshot_taken.connect(echo.increment_point)
 	add_child.call_deferred(echo)
