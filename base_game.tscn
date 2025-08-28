@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bpi2q3j5ynusw" path="res://2d_world/level.tscn" id="2_l8n8p"]
 
 [node name="BaseGame" type="Node2D"]
+position = Vector2(-2, 0)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -33,6 +34,28 @@ offset_left = -40.0
 offset_bottom = 23.0
 grow_horizontal = 0
 text = " asd"
+
+[node name="TextureRect" type="TextureRect" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 64.0
+grow_vertical = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/HUD"]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -27.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Level" parent="." instance=ExtResource("2_l8n8p")]
 time_limit = 15

@@ -69,8 +69,12 @@ func export_image() -> Image:
 
 func export_boundaries() -> void:
 	const PHYSICS_LAYER := 0
+	var road_tiles_coordinates: Array[Vector2i]
 	for tile_coords in get_used_cells():
 		var tile_data: TileData = get_cell_tile_data(tile_coords)
+		if tile_data.terrain == 0:
+			road_tiles_coordinates.append(tile_coords * tile_set.tile_size)
+
 		if tile_data.get_collision_polygons_count(PHYSICS_LAYER) == 0: continue
 
 		for polygon in range(0, tile_data.get_collision_polygons_count(PHYSICS_LAYER)):
@@ -79,3 +83,4 @@ func export_boundaries() -> void:
 			polygon_points = _offset_polygons_to_tile(polygon_points,tile_coords)
 			_create_collision_shape(polygon_points)
 	level.add_child(boudaries)
+	EventsManager.power_up_coordinates = road_tiles_coordinates

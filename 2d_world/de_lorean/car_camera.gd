@@ -9,7 +9,7 @@ enum Positions {
 const CAMERA_POSITIONS: Dictionary[Positions, Dictionary] = {
 	Positions.AHEAD: {
 		"position":Vector2(450,0),
-		"zoom":Vector2(0.75,0.75)},
+		"zoom":Vector2(0.65,0.65)},
 	Positions.CENTERED:{
 		"position":Vector2.ZERO,
 		"zoom":Vector2(0.8,0.8)},

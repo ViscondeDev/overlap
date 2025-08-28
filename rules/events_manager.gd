@@ -1,8 +1,15 @@
 extends Node
 
+signal got_power_up(power_up: PowerUp)
+signal used_power_up
+signal lap_completed
+
 @export var current_level: Level
 @export var ui: CanvasLayer
 
+var power_up_selected: PowerUp
+var power_up_coordinates: Array[Vector2i]
+var powerups: Array[PowerUp] = [Focus.new(), Sprint.new(), Heal.new()]
 var laps_completed: int = -1
 var current_player_path: PlayerPath
 var time_left: float
@@ -13,6 +20,8 @@ var clock: Dictionary[String,int] = {
 }
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("special"):
+		use_power_up()
 	if current_player_path.state == PlayerPath.State.RECORDING:
 		_tick_timer(delta)
 
@@ -33,9 +42,19 @@ func count_lap() -> void:
 	if not laps_completed == 0 and current_player_path.curve.point_count > 0:
 		current_player_path.spawn_ghost()
 		time_left = current_level.time_limit
+		lap_completed.emit()
 	else:
 		current_player_path.state = PlayerPath.State.RECORDING
 
 
-func get_power_up() -> void:
-	get_tree().get_first_node_in_group("Player").add_child(Sprint.new())
+func get_power_up(collectable: PoweUpCollectable) -> void:
+	var powerup:PowerUp = powerups.pick_random().duplicate()
+	power_up_selected = powerup
+	got_power_up.emit()
+	collectable.global_position = power_up_coordinates.pick_random()
+
+func use_power_up() -> void:
+	if power_up_selected == null: return
+	get_tree().get_first_node_in_group("Player").add_child(power_up_selected)
+	power_up_selected = null
+	used_power_up.emit()

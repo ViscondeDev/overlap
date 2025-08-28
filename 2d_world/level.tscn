@@ -66,7 +66,7 @@ position = Vector2(32, 37)
 shape = SubResource("RectangleShape2D_6g8l6")
 
 [node name="PowerUp" type="Area2D" parent="."]
-position = Vector2(4303, 1884)
+position = Vector2(4019, 1884)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("8_rys13")
