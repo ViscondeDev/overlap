@@ -8,8 +8,7 @@ position = Vector2(-2, 0)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HUD" type="Control" parent="UI"]
-layout_mode = 3
+[node name="HUD" type="MarginContainer" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,45 +16,38 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 script = ExtResource("1_lei07")
 
 [node name="Timer" type="Label" parent="UI/HUD"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 text = " asd"
 
-[node name="Laps" type="Label" parent="UI/HUD"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 23.0
-grow_horizontal = 0
+[node name="LapsDisplay" type="Label" parent="UI/HUD"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 text = " asd"
 
-[node name="TextureRect" type="TextureRect" parent="UI/HUD"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -64.0
-offset_right = 64.0
-grow_vertical = 0
+[node name="SelectedPowerUp" type="TextureRect" parent="UI/HUD"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
-[node name="ProgressBar" type="ProgressBar" parent="UI/HUD"]
+[node name="HealthBar" type="ProgressBar" parent="UI/HUD"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 20)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -27.0
-grow_horizontal = 0
-grow_vertical = 0
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
 [node name="Level" parent="." instance=ExtResource("2_l8n8p")]
 time_limit = 15

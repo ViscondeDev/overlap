@@ -6,8 +6,9 @@ signal power_up_collected
 var active: bool = false
 
 func _ready() -> void:
-	power_up_collected.connect(EventsManager.get_power_up.bind(self))
 	EventsManager.lap_completed.connect(_activate)
+	await get_tree().process_frame
+	power_up_collected.connect(EventsManager.current_level.get_power_up.bind(self))
 
 
 func _activate() -> void:

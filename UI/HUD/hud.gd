@@ -1,5 +1,12 @@
 extends Control
 
+@onready var timer: Label = %Timer
+@onready var laps_display: Label = %LapsDisplay
+@onready var selected_power_up: TextureRect = %SelectedPowerUp
+@onready var health_bar: ProgressBar = %HealthBar
+
+
+
 func _ready() -> void:
 	var health: Health =  get_tree().get_first_node_in_group("Health")
 	health.health_changed.connect(update_health.bind(health))
@@ -10,25 +17,21 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	$Timer.text = EventsManager.get_time_pretty()
+	timer.text = EventsManager.get_time_pretty()
 
 
 func display_powerup() -> void:
-	var powerup:PowerUp = EventsManager.power_up_selected
-	if powerup is Focus:
-		$TextureRect.texture = load("res://2d_world/power_up/focus.png")
-	elif powerup is Sprint:
-		$TextureRect.texture = load("res://2d_world/power_up/sprint.png")
-	elif powerup is Heal:
-		$TextureRect.texture = load("res://2d_world/power_up/heal.png")
+	var powerup:PowerUp = EventsManager.current_level.power_up_selected
+	if powerup == null:
+		selected_power_up.texture = null
 	else:
-		$TextureRect.texture = null
+		selected_power_up.texture = powerup.icon_texture
 
 
 func display_laps() -> void:
-	$Laps.text = str("Laps : %02d" % EventsManager.laps_completed)
+	laps_display.text = str("Laps : %02d" % EventsManager.laps_completed)
 
 
 func update_health(health: Health) -> void:
-	$ProgressBar.max_value = health.max_health
-	$ProgressBar.value = health.current_health
+	health_bar.max_value = health.max_health
+	health_bar.value = health.current_health

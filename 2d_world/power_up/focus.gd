@@ -1,6 +1,8 @@
 class_name Focus
 extends PowerUp
 
+var icon_texture: CompressedTexture2D = preload("res://2d_world/power_up/focus.png")
+
 func _ready() -> void:
 	_focus()
 

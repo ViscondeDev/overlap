@@ -7,7 +7,7 @@ extends TileMapLayer
 func _ready() -> void:
 	if Engine.is_editor_hint(): return
 	get_parent().add_child.call_deferred(level)
-	export_boundaries()
+	map_tilemap()
 	var level_screenshot: Image = await export_image()
 
 	var sprite = Sprite2D.new()
@@ -67,20 +67,23 @@ func export_image() -> Image:
 	return image
 
 
-func export_boundaries() -> void:
+func map_tilemap() -> void:
 	const PHYSICS_LAYER := 0
+	const ROAD_TERRAIN := 0
 	var road_tiles_coordinates: Array[Vector2i]
 	for tile_coords in get_used_cells():
 		var tile_data: TileData = get_cell_tile_data(tile_coords)
-		if tile_data.terrain == 0:
+		if tile_data.terrain == ROAD_TERRAIN:
 			road_tiles_coordinates.append(tile_coords * tile_set.tile_size)
 
 		if tile_data.get_collision_polygons_count(PHYSICS_LAYER) == 0: continue
-
 		for polygon in range(0, tile_data.get_collision_polygons_count(PHYSICS_LAYER)):
 			var polygon_points: PackedVector2Array = tile_data.get_collision_polygon_points(PHYSICS_LAYER, polygon)
 			if polygon_points.size() == 0: continue
 			polygon_points = _offset_polygons_to_tile(polygon_points,tile_coords)
 			_create_collision_shape(polygon_points)
 	level.add_child(boudaries)
-	EventsManager.power_up_coordinates = road_tiles_coordinates
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	EventsManager.current_level.power_up_coordinates = road_tiles_coordinates

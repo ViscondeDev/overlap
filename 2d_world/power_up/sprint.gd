@@ -1,6 +1,8 @@
 class_name Sprint
 extends PowerUp
 
+var icon_texture: CompressedTexture2D = preload("res://2d_world/power_up/sprint.png")
+
 const ENGINE_BOOST: int = 200
 const MAX_SPEED_BOOST: int = 250
 

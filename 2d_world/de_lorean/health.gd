@@ -8,6 +8,7 @@ signal health_changed
 
 var current_health:int:
 	set(value):
+		value = clamp(value, 0, max_health)
 		current_health = value
 		health_changed.emit()
 		if current_health <= 0:
@@ -21,14 +22,13 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if not body is PhysicsBody2D: return
-
 	current_health -= _calculate_damage(player, body)
 
-func _calculate_damage(body1: CharacterBody2D, body2: PhysicsBody2D) -> int:
-	var speed1: Vector2 = body1.velocity
-	var speed2: Vector2 = body2.velocity if body2 is CharacterBody2D else Vector2.ZERO
-	var relative_velocity :Vector2 = speed2 - speed1
-	var angle: Vector2 = (body2.global_position - body1.global_position).normalized()
-	var tangent: float = relative_velocity.normalized().dot(angle)
-	var damage = int((relative_velocity * tangent).length() * speed_to_damage_ratio)
-	return damage
+func _calculate_damage(body1: DeLorean, body2: PhysicsBody2D) -> int:
+	var _speed1: Vector2 = body1.velocity
+	var _speed2: Vector2 = body2.velocity if body2 is CharacterBody2D else Vector2.ZERO
+	var _relative_velocity :Vector2 = _speed2 - _speed1
+	var _angle: Vector2 = (body2.global_position - body1.global_position).normalized()
+	var _tangent: float = _relative_velocity.normalized().dot(_angle)
+	var _damage = int((_relative_velocity * _tangent).length() * speed_to_damage_ratio)
+	return _damage
