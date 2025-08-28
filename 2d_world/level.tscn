@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bpi2q3j5ynusw"]
+[gd_scene load_steps=13 format=4 uid="uid://bpi2q3j5ynusw"]
 
 [ext_resource type="Script" uid="uid://dw7w47sj88n76" path="res://2d_world/level.gd" id="1_4b6sw"]
 [ext_resource type="PackedScene" uid="uid://d30a8kffhkvc3" path="res://2d_world/de_lorean/de_lorean.tscn" id="2_4xvn0"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" uid="uid://o0cvsxo53q1w" path="res://2d_world/track/player_path.gd" id="5_xciqj"]
 [ext_resource type="PackedScene" uid="uid://c05jwaefw28f7" path="res://2d_world/echo/echo.tscn" id="6_b7pc4"]
 [ext_resource type="Script" uid="uid://lug821slslef" path="res://2d_world/track/finish_line.gd" id="7_62loj"]
+[ext_resource type="Texture2D" uid="uid://dix75tf6hefmv" path="res://icon.png" id="8_4xvn0"]
+[ext_resource type="Script" uid="uid://tuo334nsb40u" path="res://2d_world/power_up/power_up_collectable.gd" id="8_rys13"]
 
 [sub_resource type="Curve2D" id="Curve2D_ryrav"]
 _data = {
@@ -16,6 +18,9 @@ point_count = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g8l6"]
 size = Vector2(228, 624)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rys13"]
+size = Vector2(262, 258)
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_4b6sw")
@@ -37,18 +42,18 @@ echo_scene = ExtResource("6_b7pc4")
 player = NodePath("../DeLorean")
 updates_per_second = 10
 
-[node name="Main" type="Area2D" parent="."]
+[node name="Main" type="Area2D" parent="PlayerPath"]
 position = Vector2(2499, 3523)
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("7_62loj")
 type = "Main"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Main"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPath/Main"]
 position = Vector2(32, 37)
 shape = SubResource("RectangleShape2D_6g8l6")
 
-[node name="Half" type="Area2D" parent="." node_paths=PackedStringArray("main_line")]
+[node name="Half" type="Area2D" parent="PlayerPath" node_paths=PackedStringArray("main_line")]
 position = Vector2(2358, 1426)
 collision_layer = 0
 collision_mask = 4
@@ -56,6 +61,20 @@ script = ExtResource("7_62loj")
 type = "Half"
 main_line = NodePath("../Main")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Half"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPath/Half"]
 position = Vector2(32, 37)
 shape = SubResource("RectangleShape2D_6g8l6")
+
+[node name="PowerUp" type="Area2D" parent="."]
+position = Vector2(4303, 1884)
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("8_rys13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PowerUp"]
+shape = SubResource("RectangleShape2D_rys13")
+
+[node name="Sprite2D" type="Sprite2D" parent="PowerUp"]
+texture = ExtResource("8_4xvn0")
+
+[connection signal="body_entered" from="PowerUp" to="PowerUp" method="_on_body_entered"]

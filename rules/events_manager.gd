@@ -35,3 +35,7 @@ func count_lap() -> void:
 		time_left = current_level.time_limit
 	else:
 		current_player_path.state = PlayerPath.State.RECORDING
+
+
+func get_power_up() -> void:
+	get_tree().get_first_node_in_group("Player").add_child(Sprint.new())
